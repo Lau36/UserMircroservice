@@ -1,5 +1,6 @@
 package com.example.user_mircroservice.infrastructure.configuration.jwtconfig;
 
+import com.example.user_mircroservice.infrastructure.configuration.Constants;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -53,7 +54,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private String getTokenFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader(HttpHeaders.AUTHORIZATION);
-        if(StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
+        if(StringUtils.hasText(bearerToken) && bearerToken.startsWith(Constants.TOKEN_START_WITH)) {
             return bearerToken.substring(7);
         }
         return null;

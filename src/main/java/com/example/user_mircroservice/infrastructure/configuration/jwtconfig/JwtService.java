@@ -1,5 +1,6 @@
 package com.example.user_mircroservice.infrastructure.configuration.jwtconfig;
 
+import com.example.user_mircroservice.infrastructure.configuration.Constants;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -14,17 +15,18 @@ import java.util.function.Function;
 
 @Service
 public class JwtService {
-    private static final String jwtSecretKey = System.getenv("JWT_SECRET");
+    private static final String jwtSecretKey = System.getenv(Constants.TOKEN_KEY);
 
-    public String getToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+    public String getToken(UserDetails userDetails, Long userId) {
+        return generateToken(new HashMap<>(), userDetails, userId);
     }
 
-    private String generateToken(Map<String,Object> extraClaims, UserDetails userDetails) {
+    private String generateToken(Map<String,Object> extraClaims, UserDetails userDetails, Long userId) {
         return Jwts.builder()
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .claim("role", userDetails.getAuthorities().toString())
+                .claim( "User_id", userId)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7))
                 .signWith(SignatureAlgorithm.HS256, jwtSecretKey)

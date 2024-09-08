@@ -4,6 +4,7 @@ import com.example.user_mircroservice.infrastructure.adapters.input.dto.request.
 import com.example.user_mircroservice.infrastructure.adapters.input.dto.response.AuthResponse;
 import com.example.user_mircroservice.infrastructure.adapters.output.persistence.entity.UserEntity;
 import com.example.user_mircroservice.infrastructure.adapters.output.persistence.repository.UserRepository;
+import com.example.user_mircroservice.infrastructure.configuration.Constants;
 import com.example.user_mircroservice.infrastructure.configuration.jwtconfig.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,8 +25,8 @@ public class AuthService {
 
         UserEntity userEntity = userRepository.findByEmail(authRequest.getEmail()).orElseThrow();
         UserDetails user = new UserDetailsImpl(userEntity);
-        String token = jwtService.getToken(user);
-        return new AuthResponse(token, "Inicio de sesion exitoso");
+        String token = jwtService.getToken(user, userEntity.getId());
+        return new AuthResponse(token, Constants.LOGIN_SUCCESSFUL);
 
     }
 }
