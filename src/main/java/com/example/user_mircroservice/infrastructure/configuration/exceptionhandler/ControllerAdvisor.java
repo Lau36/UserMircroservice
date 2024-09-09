@@ -72,5 +72,26 @@ public class ControllerAdvisor {
                 )
         );
     }
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ExceptionResponse> handleUserNotFoundException(UserNotFoundException e) {
+        return ResponseEntity.badRequest().body(
+                new ExceptionResponse(
+                        String.format(e.getMessage()),
+                        HttpStatus.BAD_REQUEST.toString(),
+                        LocalDateTime.now()
+                )
+        );
+    }
+    @ExceptionHandler(InvalidPasswordException.class)
+    public ResponseEntity<ExceptionResponse> handleInvalidPasswordException(InvalidPasswordException e) {
+        return ResponseEntity.badRequest().body(
+                new ExceptionResponse(
+                        String.format(e.getMessage()),
+                        HttpStatus.BAD_REQUEST.toString(),
+                        LocalDateTime.now()
+                )
+        );
+    }
+
 
 }

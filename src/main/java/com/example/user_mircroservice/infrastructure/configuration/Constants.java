@@ -5,9 +5,9 @@ public class Constants {
         throw new IllegalStateException("Utility class");
     }
 
+    public static final String ROLE_ADMIN = "ROLE_Admin";
     public static final String TOKEN_KEY = "JWT_SECRET";
     public static final String TOKEN_START_WITH = "Bearer ";
-    public static final String LOGIN_SUCCESSFUL = "Inicio de sesión exitoso";
     public static final String USER_NOT_FOUND_BY_EMAIL = "El email del usuario no existe";
     public static final String ROLE_NOT_FOUND_BY_ID = "El id del rol no existe";
     public static final String ROLE_NOT_FOUND_BY_NAME = "El nombre del rol no existe";

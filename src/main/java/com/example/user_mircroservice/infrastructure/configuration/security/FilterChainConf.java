@@ -1,5 +1,6 @@
 package com.example.user_mircroservice.infrastructure.configuration.security;
 
+import com.example.user_mircroservice.infrastructure.configuration.Constants;
 import com.example.user_mircroservice.infrastructure.configuration.jwtconfig.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +25,7 @@ public class FilterChainConf {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/Users").hasAuthority("ROLE_Aux_bodega")
+                        .requestMatchers("/Users").hasAuthority(Constants.ROLE_ADMIN)
                         .requestMatchers("/Auth").permitAll()
                         .anyRequest().authenticated()
                 )
