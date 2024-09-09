@@ -1,8 +1,9 @@
-package com.example.user_mircroservice.infrastructure.configuration;
+package com.example.user_mircroservice.infrastructure.configuration.security;
 
 import com.example.user_mircroservice.infrastructure.adapters.output.persistence.UserDetailsImpl;
 import com.example.user_mircroservice.infrastructure.adapters.output.persistence.entity.UserEntity;
 import com.example.user_mircroservice.infrastructure.adapters.output.persistence.repository.UserRepository;
+import com.example.user_mircroservice.infrastructure.configuration.Constants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

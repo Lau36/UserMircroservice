@@ -1,14 +1,15 @@
-package com.example.user_mircroservice.infrastructure.adapters.input.mapper;
+package com.example.user_mircroservice.infrastructure.adapters.input.mapper.implementations;
 
 import com.example.user_mircroservice.domain.models.Role;
 import com.example.user_mircroservice.domain.models.User;
 import com.example.user_mircroservice.infrastructure.adapters.input.dto.request.AddUserRequest;
+import com.example.user_mircroservice.infrastructure.adapters.input.mapper.UserRequestMapper;
 import lombok.AllArgsConstructor;
 
 import java.time.LocalDate;
 
 @AllArgsConstructor
-public class UserRequestMapperImpl implements UserRequestMapper{
+public class UserRequestMapperImpl implements UserRequestMapper {
 
     public User addRequestToUser(AddUserRequest addUserRequest) {
         if ( addUserRequest == null ) {

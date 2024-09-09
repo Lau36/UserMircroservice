@@ -1,9 +1,10 @@
-package com.example.user_mircroservice.infrastructure.adapters.output.persistence.mapper;
+package com.example.user_mircroservice.infrastructure.adapters.output.persistence.mapper.implementations;
 
 import com.example.user_mircroservice.domain.models.Role;
 import com.example.user_mircroservice.domain.models.User;
 import com.example.user_mircroservice.infrastructure.adapters.output.persistence.entity.RoleEntity;
 import com.example.user_mircroservice.infrastructure.adapters.output.persistence.entity.UserEntity;
+import com.example.user_mircroservice.infrastructure.adapters.output.persistence.mapper.UserMapper;
 
 public class UserMapperImpl implements UserMapper {
 

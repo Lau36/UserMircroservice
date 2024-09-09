@@ -42,7 +42,6 @@ import static org.mockito.Mockito.*;
 
     @Test
     void testCreateUser(){
-        // Arrange
         AddUserRequest addUserRequest = new AddUserRequest("John", "Doe", "123456789", "+573054748905", null, "john.doe@example.com", "password123");
         User user = new User(1L, "John", "Doe", "123456789", "+573054748905", null, "john.doe@example.com", "password123", null);
         AddUserResponse addUserResponse = new AddUserResponse(Constants.USER_CREATED_SUCCESFULL, user.getEmail());

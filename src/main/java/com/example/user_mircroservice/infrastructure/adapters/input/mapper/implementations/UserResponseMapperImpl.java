@@ -1,7 +1,8 @@
-package com.example.user_mircroservice.infrastructure.adapters.input.mapper;
+package com.example.user_mircroservice.infrastructure.adapters.input.mapper.implementations;
 
 import com.example.user_mircroservice.domain.models.User;
 import com.example.user_mircroservice.infrastructure.adapters.input.dto.response.AddUserResponse;
+import com.example.user_mircroservice.infrastructure.adapters.input.mapper.UserResponseMapper;
 
 public class UserResponseMapperImpl implements UserResponseMapper {
 

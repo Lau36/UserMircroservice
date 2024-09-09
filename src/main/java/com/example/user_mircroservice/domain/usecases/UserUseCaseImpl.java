@@ -22,7 +22,7 @@ public class UserUseCaseImpl implements IUserUseCase {
     @Override
     public User createUser(User user) {
         userValidations.userValidation(user, userPersistencePort);
-        Role role = rolePersistencePort.findByName(Constants.AUX_BODEGA); //Aux_bodega role
+        Role role = rolePersistencePort.findByName(Constants.AUX_BODEGA);
         user.setRole(role);
         return userPersistencePort.createUser(user);
     }
