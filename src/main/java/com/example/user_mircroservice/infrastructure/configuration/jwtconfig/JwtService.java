@@ -5,9 +5,11 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.micrometer.common.lang.NonNull;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +27,7 @@ public class JwtService {
         return Jwts.builder()
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
-                .claim("role", userDetails.getAuthorities().toString())
+                .claim("role", getAuthority(userDetails.getAuthorities()))
                 .claim( "User_id", userId)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7))
@@ -63,6 +65,10 @@ public class JwtService {
 
     public boolean isTokenExpired (String token) {
         return getExpiration(token).before(new Date());
+    }
+
+    private String getAuthority(Collection<? extends GrantedAuthority> authorities) {
+        return authorities.isEmpty() ? "" : authorities.iterator().next().getAuthority();
     }
 
 }

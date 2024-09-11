@@ -9,5 +9,5 @@ public class Constants {
     public static final String PHONE_REGULAR_EXPRESSION = "^\\+?[0-9]{1,13}$";
     public static final String AUX_BODEGA = "Aux_bodega";
     public static final String USER_NOT_FOUND_BY_EMAIL = "El email ingresado no está asociado a ningun usuario";
-    public static final String INVALID_PASSWORD = "La contraseña es incorrecta";
+    public static final String INVALID_CREDENTIALS = "Las credenciales son incorrectas";
 }
