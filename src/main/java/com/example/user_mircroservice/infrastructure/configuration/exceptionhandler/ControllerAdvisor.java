@@ -83,7 +83,7 @@ public class ControllerAdvisor {
         );
     }
     @ExceptionHandler(InvalidCredentialsException.class)
-    public ResponseEntity<ExceptionResponse> handleInvalidPasswordException(InvalidCredentialsException e) {
+    public ResponseEntity<ExceptionResponse> handleInvalidCredentialsException(InvalidCredentialsException e) {
         return ResponseEntity.badRequest().body(
                 new ExceptionResponse(
                         String.format(e.getMessage()),
