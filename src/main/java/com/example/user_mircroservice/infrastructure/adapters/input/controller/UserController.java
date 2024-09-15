@@ -6,14 +6,17 @@ import com.example.user_mircroservice.infrastructure.adapters.input.dto.request.
 import com.example.user_mircroservice.infrastructure.adapters.input.dto.response.AddUserResponse;
 import com.example.user_mircroservice.infrastructure.adapters.input.mapper.UserRequestMapper;
 import com.example.user_mircroservice.infrastructure.adapters.input.mapper.UserResponseMapper;
+import com.example.user_mircroservice.infrastructure.adapters.input.utils.SwaggerConstants;
 import com.example.user_mircroservice.infrastructure.configuration.Constants;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/Users")
@@ -23,6 +26,14 @@ public class UserController {
     private final UserRequestMapper userRequestMapper;
     private final UserResponseMapper userResponseMapper;
 
+    @Operation(summary = SwaggerConstants.CREATED_USER)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = SwaggerConstants.MESSAGE_CREATED,
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = AddUserResponse.class)) }),
+            @ApiResponse(responseCode = "400", description = SwaggerConstants.MESSAGE_BAD_REQUEST,
+                    content = @Content)
+    })
     @PostMapping
     public ResponseEntity<AddUserResponse> createUser(@RequestBody AddUserRequest addUserRequest) {
         User user = userRequestMapper.addRequestToUser(addUserRequest);
