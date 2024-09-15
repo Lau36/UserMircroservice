@@ -38,4 +38,14 @@ import static org.mockito.Mockito.*;
         assertEquals(user, userCreated);
         verify(userUseCase, times(1)).createUser(user);
     }
+
+     @Test
+     void createCustomerUserTest(){
+         when(userService.createCustomerUser(user)).thenReturn(user);
+
+         User userCreated = userService.createCustomerUser(user);
+
+         assertEquals(user, userCreated);
+         verify(userUseCase, times(1)).createCustomerUser(user);
+     }
 }

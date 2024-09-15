@@ -29,4 +29,10 @@ public class UserController {
         User userSaved = userService.createUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(userResponseMapper.toAddUserResponse(Constants.USER_CREATED_SUCCESFULL, userSaved));
     }
+    @PostMapping("/Customer")
+    public ResponseEntity<AddUserResponse> createCustomerUser(@RequestBody AddUserRequest addUserRequest) {
+        User user = userRequestMapper.addRequestToUser(addUserRequest);
+        User userSaved = userService.createCustomerUser(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userResponseMapper.toAddUserResponse(Constants.USER_CREATED_SUCCESFULL, userSaved));
+    }
 }

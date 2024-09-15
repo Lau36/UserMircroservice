@@ -8,5 +8,7 @@ public class Constants {
     public static final String EMAIL_REGULAR_EXPRESSION = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
     public static final String PHONE_REGULAR_EXPRESSION = "^\\+?[0-9]{1,13}$";
     public static final String AUX_BODEGA = "Aux_bodega";
+    public static final String CUSTOMER = "Cliente";
     public static final String INVALID_CREDENTIALS = "Las credenciales son incorrectas";
+    public static final String VALIDATION_FAILED = "La validación falló";
 }
