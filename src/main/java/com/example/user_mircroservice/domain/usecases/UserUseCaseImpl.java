@@ -26,4 +26,12 @@ public class UserUseCaseImpl implements IUserUseCase {
         user.setRole(role);
         return userPersistencePort.createUser(user);
     }
+
+    @Override
+    public User createCustomerUser(User user) {
+        userValidations.userValidation(user, userPersistencePort);
+        Role role = rolePersistencePort.findByName(Constants.CUSTOMER);
+        user.setRole(role);
+        return userPersistencePort.createUser(user);
+    }
 }
