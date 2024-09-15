@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,9 @@ public class UserController {
     private final UserRequestMapper userRequestMapper;
     private final UserResponseMapper userResponseMapper;
 
-    @Operation(summary = SwaggerConstants.CREATED_USER)
+    @Operation(summary = SwaggerConstants.CREATED_USER,
+
+            security = @SecurityRequirement(name = "bearerAuth"))
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = SwaggerConstants.MESSAGE_CREATED,
                     content = { @Content(mediaType = "application/json",
