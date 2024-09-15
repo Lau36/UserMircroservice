@@ -1,7 +1,6 @@
 package com.example.user_mircroservice.application;
 
 import com.example.user_mircroservice.application.services.UserService;
-import com.example.user_mircroservice.domain.models.Role;
 import com.example.user_mircroservice.domain.models.User;
 import com.example.user_mircroservice.domain.ports.input.IUserUseCase;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,15 +22,11 @@ import static org.mockito.Mockito.*;
 
     private User user;
 
-    private LocalDate date;
-    private Role role;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        date = LocalDate.of(2000,1,1);
-        role = new Role(1L,"Rol", "es un rol");
-        user = new User(1L, "Usertest","userlastname","1109668712","+573054748905",date,"email@gmail.com","contraseña123",role);
+        user = new User(1L, "Usertest","userlastname","1109668712","+573054748905",LocalDate.now(),"email@gmail.com","contraseña123",null);
     }
 
     @Test
