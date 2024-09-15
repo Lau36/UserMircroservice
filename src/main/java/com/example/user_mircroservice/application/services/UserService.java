@@ -14,4 +14,9 @@ public class UserService implements IUserUseCase {
     public User createUser(User user) {
         return userUseCase.createUser(user);
     }
+
+    @Override
+    public User createCustomerUser(User user) {
+        return userUseCase.createCustomerUser(user);
+    }
 }

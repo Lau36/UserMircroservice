@@ -24,7 +24,7 @@ public class AuthController {
     private final AuthResponseMapper authResponseMapper;
 
     @PostMapping
-    public ResponseEntity<AuthResponse> createUser(@RequestBody @Valid AuthRequest authRequest) {
+    public ResponseEntity<AuthResponse> login(@RequestBody @Valid AuthRequest authRequest) {
         Auth auth = authRequestMapper.toAuth(authRequest);
         AuthResponse response = authResponseMapper.toAuthResponse(authService.login(auth));
         return ResponseEntity.ok(response);

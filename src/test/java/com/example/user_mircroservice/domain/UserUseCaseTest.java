@@ -71,6 +71,38 @@ class UserUseCaseTest {
         verifyNoInteractions(rolePersistencePort);
         verify(userPersistencePort, never()).createUser(any(User.class));
 
-        assertEquals("Validation failed", exception.getMessage());
+        assertEquals(Constants.VALIDATION_FAILED, exception.getMessage());
+    }
+
+    @Test
+    void testCreateCustumerUserSuccessfully() {
+        doNothing().when(userValidations).userValidation(user, userPersistencePort);
+
+        when(rolePersistencePort.findByName(Constants.CUSTOMER)).thenReturn(role);
+
+        when(userPersistencePort.createUser(user)).thenReturn(user);
+
+        User createdUser = userUseCaseImpl.createCustomerUser(user);
+
+        verify(userValidations, times(1)).userValidation(user, userPersistencePort);
+        verify(rolePersistencePort, times(1)).findByName(Constants.CUSTOMER);
+        verify(userPersistencePort, times(1)).createUser(user);
+
+        assertNotNull(createdUser);
+        assertEquals(role, createdUser.getRole());
+    }
+
+    @Test
+    void testCustumerUserValidationFails() {
+        doThrow(new RuntimeException(Constants.VALIDATION_FAILED)).when(userValidations).userValidation(user, userPersistencePort);
+
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> userUseCaseImpl.createCustomerUser(user));
+
+        verify(userValidations, times(1)).userValidation(user, userPersistencePort);
+
+        verifyNoInteractions(rolePersistencePort);
+        verify(userPersistencePort, never()).createUser(any(User.class));
+
+        assertEquals(Constants.VALIDATION_FAILED, exception.getMessage());
     }
 }

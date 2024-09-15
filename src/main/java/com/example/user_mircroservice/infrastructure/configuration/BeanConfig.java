@@ -3,6 +3,7 @@ package com.example.user_mircroservice.infrastructure.configuration;
 import com.example.user_mircroservice.application.services.AuthService;
 import com.example.user_mircroservice.application.services.UserService;
 import com.example.user_mircroservice.domain.ports.output.IAuthPersistencePort;
+import com.example.user_mircroservice.domain.ports.output.IAuthenticationManagerPort;
 import com.example.user_mircroservice.domain.ports.output.IRolePersistencePort;
 import com.example.user_mircroservice.domain.ports.output.IUserPersistencePort;
 import com.example.user_mircroservice.domain.ports.output.password.IPasswordEncoderPort;
@@ -22,6 +23,7 @@ import com.example.user_mircroservice.infrastructure.adapters.output.persistence
 import com.example.user_mircroservice.infrastructure.configuration.jwtconfig.JwtService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
@@ -37,8 +39,13 @@ public class BeanConfig {
     }
 
     @Bean
-    public AuthService authService(final IUserPersistencePort userPersistencePort, final IPasswordEncoderPort passwordEncoder, final IAuthPersistencePort authPersistencePort) {
-        return new AuthService(new AuthUseCaseImpl(userPersistencePort, passwordEncoder, authPersistencePort));
+    public AuthService authService(final IAuthPersistencePort authPersistencePort, final IAuthenticationManagerPort authenticationManagerPort) {
+        return new AuthService(new AuthUseCaseImpl(  authPersistencePort, authenticationManagerPort));
+    }
+
+    @Bean
+    public IAuthenticationManagerPort authenticationManagerPort(final AuthenticationManager authenticationManager) {
+        return new AuthenticationManagerImpl(authenticationManager);
     }
 
     @Bean
