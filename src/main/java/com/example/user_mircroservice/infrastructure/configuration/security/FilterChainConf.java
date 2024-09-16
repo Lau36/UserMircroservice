@@ -29,7 +29,8 @@ public class FilterChainConf {
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html").permitAll()
-                        .requestMatchers("/Users").hasAuthority(Constants.ROLE_ADMIN)
+                        .requestMatchers("/Users").hasAuthority(Constants.ADMIN_ROLE)
+                        .requestMatchers("/Users/Customer").hasAuthority(Constants.CUSTOMER_ROLE)
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session

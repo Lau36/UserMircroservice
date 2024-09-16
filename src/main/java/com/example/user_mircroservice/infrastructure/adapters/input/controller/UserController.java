@@ -27,8 +27,8 @@ public class UserController {
     private final UserRequestMapper userRequestMapper;
     private final UserResponseMapper userResponseMapper;
 
-    @Operation(summary = SwaggerConstants.CREATED_USER,
-
+    @Operation(summary = SwaggerConstants.CREATE_USER,
+            description = SwaggerConstants.DESCRIPTION_CREATE_USER_AUX_BODEGA,
             security = @SecurityRequirement(name = "bearerAuth"))
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = SwaggerConstants.MESSAGE_CREATED,
@@ -43,6 +43,17 @@ public class UserController {
         User userSaved = userService.createUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(userResponseMapper.toAddUserResponse(Constants.USER_CREATED_SUCCESFULL, userSaved));
     }
+
+    @Operation(summary = SwaggerConstants.CREATE_USER,
+            description = SwaggerConstants.DESCRIPTION_CREATE_USER_CLIENTE,
+            security = @SecurityRequirement(name = "bearerAuth"))
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = SwaggerConstants.MESSAGE_CREATED,
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = AddUserResponse.class)) }),
+            @ApiResponse(responseCode = "400", description = SwaggerConstants.MESSAGE_BAD_REQUEST,
+                    content = @Content)
+    })
     @PostMapping("/Customer")
     public ResponseEntity<AddUserResponse> createCustomerUser(@RequestBody AddUserRequest addUserRequest) {
         User user = userRequestMapper.addRequestToUser(addUserRequest);
