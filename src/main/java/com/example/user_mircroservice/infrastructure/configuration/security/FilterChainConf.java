@@ -25,8 +25,12 @@ public class FilterChainConf {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/Users").hasAuthority(Constants.ROLE_ADMIN)
-                        .requestMatchers("/Auth").permitAll()
+                        .requestMatchers("/Auth",
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html").permitAll()
+                        .requestMatchers("/Users").hasAuthority(Constants.ADMIN_ROLE)
+                        .requestMatchers("/Users/Customer").hasAuthority(Constants.CUSTOMER_ROLE)
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
