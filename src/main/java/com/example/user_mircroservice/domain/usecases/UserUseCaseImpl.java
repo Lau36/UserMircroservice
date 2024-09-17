@@ -21,17 +21,19 @@ public class UserUseCaseImpl implements IUserUseCase {
 
     @Override
     public User createUser(User user) {
-        userValidations.userValidation(user, userPersistencePort);
-        Role role = rolePersistencePort.findByName(Constants.AUX_BODEGA);
-        user.setRole(role);
-        return userPersistencePort.createUser(user);
+        return createUserPersistencePort(user,Constants.AUX_BODEGA);
     }
 
     @Override
     public User createCustomerUser(User user) {
+        return createUserPersistencePort(user,Constants.CUSTOMER);
+    }
+
+    private User createUserPersistencePort(User user, String userRol) {
         userValidations.userValidation(user, userPersistencePort);
-        Role role = rolePersistencePort.findByName(Constants.CUSTOMER);
+        Role role = rolePersistencePort.findByName(userRol);
         user.setRole(role);
         return userPersistencePort.createUser(user);
+
     }
 }

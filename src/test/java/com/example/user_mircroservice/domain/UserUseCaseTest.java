@@ -62,7 +62,7 @@ class UserUseCaseTest {
 
     @Test
     void testCreateUserValidationFails() {
-        doThrow(new RuntimeException("Validation failed")).when(userValidations).userValidation(user, userPersistencePort);
+        doThrow(new RuntimeException(Constants.VALIDATION_FAILED)).when(userValidations).userValidation(user, userPersistencePort);
 
         RuntimeException exception = assertThrows(RuntimeException.class, () -> userUseCaseImpl.createUser(user));
 
